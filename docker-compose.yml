@@ -1,0 +1,53 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend
+    container_name: restaurant-app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    container_name: backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - 8081:8081
+    depends_on:
+      - db
+  db:
+    image: mysql:latest
+    environment:
+       MYSQL_ROOT_PASSWORD: demo
+       MYSQL_DATABASE: db_restaurant
+       MYSQL_USER: dbuser
+       MYSQL_PASSWORD: demo
+    ports:
+      - 3306:3306
+    volumes:
+      - db-data:/var/lib/mysql
+
+  datadog_sidecar:
+      build: ./datadog-sidecar
+      links:
+        - frontend
+      environment:
+        - DD_API_KEY=edc675481ff30e55766a590bc51dc6cc59131d9f
+        - DD_LOGS_ENABLED=true
+        - DD_SITE="datadoghq.com"
+        - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+        - DD_AC_EXCLUDE="name:datadog-agent"
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+        - /proc/:/host/proc/:ro
+        - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+
+      networks:
+        - default
+
+volumes:
+  db-data:
