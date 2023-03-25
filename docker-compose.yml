@@ -1,20 +1,20 @@
 version: '3'
 services:
   frontend:
-    build: ./frontend
+    build: ./react-application/frontend
     container_name: restaurant-app
     volumes:
-      - ./frontend:/app
+      - ./react-application/frontend:/app
     ports:
       - 8080:8080
     depends_on:
       - backend
 
   backend:
-    build: ./backend
+    build: ./react-application/backend
     container_name: backend
     volumes:
-      - ./backend:/app
+      - ./react-application/backend:/app
     ports:
       - 8081:8081
     depends_on:
@@ -33,12 +33,12 @@ services:
 
   datadog_sidecar:
       build: ./datadog-sidecar
-      links:
+      depends_on:
         - frontend
       environment:
-        - DD_API_KEY=edc675481ff30e55766a590bc51dc6cc59131d9f
+        - DD_API_KEY=<your_datadog_api_key>
         - DD_LOGS_ENABLED=true
-        - DD_SITE="datadoghq.com"
+        - DD_SITE=datadoghq.com
         - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
         - DD_AC_EXCLUDE="name:datadog-agent"
       volumes:

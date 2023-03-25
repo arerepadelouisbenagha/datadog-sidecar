@@ -1,2 +1,2 @@
-api_key: edc675481ff30e55766a590bc51dc6cc59131d9f
+api_key: <your_datadog_api_key>
 logs_enabled: true
