@@ -4,7 +4,7 @@ pipeline {
     environment {
         SERVER_USERNAME = "$credentials('server-username')"
         SERVER_SSH_KEY  = "$credentials('server-ssh-key')"
-        SERVER_HOST     = '52.3.224.2'
+        SERVER_HOST     = '18.204.34.175'
         DOCKER_PASSWORD = "$credentials('docker-login')"
     }
 
