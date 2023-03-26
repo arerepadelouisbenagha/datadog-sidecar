@@ -47,7 +47,7 @@ ssh -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${SERVER_HOST} "
 # Log in to DockerHub, pull the image, and run docker-compose on the target server
 ssh -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${SERVER_HOST} "
   echo '${DOCKER_PASSWORD}' | docker login --username '${DOCKER_USERNAME}' --password-stdin
-  cd /var/lib/jenkins/workspace/datadog-sidecar && sudo docker-compose up -d
+  docker-compose up -d
 "
 
 echo "Deployment successful"
