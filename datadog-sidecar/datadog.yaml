@@ -1,2 +1,2 @@
-api_key: <your_datadog_api_key>
+api_key: ${datadog_api_key}
 logs_enabled: true

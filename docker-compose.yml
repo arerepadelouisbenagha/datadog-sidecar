@@ -36,7 +36,7 @@ services:
       depends_on:
         - frontend
       environment:
-        - DD_API_KEY=<your_datadog_api_key>
+        - DD_API_KEY=${datadog_api_key}
         - DD_LOGS_ENABLED=true
         - DD_SITE=datadoghq.com
         - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true

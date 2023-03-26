@@ -37,3 +37,4 @@ terraform.rc
 
 # ssh Keys
 *react-app-key*
+terraform.tfvars

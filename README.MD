@@ -57,3 +57,7 @@ Jenkins permissions, make sure to ad jenkins user with ALL permersion like:
 ```
 jenkins ALL=(ALL) NOPASSWD:ALL
 ```
+
+Inject Secrets, i handled that with terraform on the infrastructure side.
+In your null_resource with `local-exec` provisioner, upload the rendered configuration files to the target server and continue with the deployment process.
+In both cases, you'll need to create template files for datadog.yaml and docker-compose.yaml with placeholders for the API key, like `${DATADOG_API_KEY}`. The actual configuration files will be generated with the secrets injected during the deployment process, ensuring that the API keys are never stored in the repository.
