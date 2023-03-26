@@ -9,7 +9,6 @@ SERVER_HOST="${SERVER_HOST:-18.204.34.175}"
 
 # Run as non root user
 sudo usermod -aG docker $USER
-newgrp docker 
 
 # Check if variables are set
 if [[ -z $DOCKER_USERNAME || -z $DOCKER_PASSWORD || -z $DOCKER_IMAGE || -z $SERVER_USERNAME || -z $SERVER_HOST ]]; then
@@ -17,6 +16,6 @@ if [[ -z $DOCKER_USERNAME || -z $DOCKER_PASSWORD || -z $DOCKER_IMAGE || -z $SERV
     exit 1
 else
     # Run docker-compose on the target server
-    docker-compose up -d
+    sg docker -c "docker-compose up -d"
     echo "Deployment successful"
 fi
