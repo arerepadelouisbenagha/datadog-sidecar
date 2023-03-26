@@ -10,7 +10,7 @@ datadog_api_key="${datadog_api_key:-datadog_api_key}"
 # Run as non root user
 sudo usermod -aG docker $USER
 
-sed "s/${datadog_api_key}/$datadog_api_key/g" datadog-sidecar/datadog-sidecar/datadog-config.yml
+sed "s/${datadog_api_key}/$datadog_api_key/g" datadog-sidecar/datadog-sidecar/datadog-config.yaml
 
 # Check if variables are set
 if [[ -z $DOCKER_USERNAME || -z $DOCKER_PASSWORD || -z $SERVER_USERNAME || -z $SERVER_HOST ]]; then
