@@ -18,6 +18,6 @@ if [[ -z $DOCKER_USERNAME || -z $DOCKER_PASSWORD || -z $SERVER_USERNAME || -z $S
     exit 1
 else
     # Run docker-compose on the target server
-    docker-compose --env-file <(echo "datadog_api_key=${datadog_api_key}") up -d
+    docker-compose --env-file <(echo "DD_API_KEY=${datadog_api_key}") up -d
     echo "Deployment successful"
 fi
