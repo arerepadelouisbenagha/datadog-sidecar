@@ -5,6 +5,7 @@ DOCKER_USERNAME="${DOCKER_USERNAME:-dockerhub-username}"
 DOCKER_PASSWORD="${DOCKER_PASSWORD:-dockerhub-token}"
 SERVER_USERNAME="ubuntu"
 SERVER_HOST="44.205.16.50"
+DATADOG_API_KEY="${DATADOG_API_KEY:-datadog_api_key}"
 
 # Run as non root user
 sudo usermod -aG docker $USER
@@ -15,6 +16,7 @@ if [[ -z $DOCKER_USERNAME || -z $DOCKER_PASSWORD || -z $SERVER_USERNAME || -z $S
     exit 1
 else
     # Run docker-compose on the target server
-    sg docker -c "docker-compose up -d"
+    # sg docker -c "docker-compose up -d"
+    docker-compose --env-file <(echo "DATADOG_API_KEY=${DATADOG_API_KEY}") up -d
     echo "Deployment successful"
 fi
