@@ -22,13 +22,10 @@ pipeline {
                         usernamePassword(credentialsId: 'docker-login', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD'),
                         sshUserPrivateKey(credentialsId: 'server-ssh-key', keyFileVariable: 'SSH_KEY_FILE', usernameVariable: 'SERVER_USERNAME')
                     ]) {
-                        sh """
-                            export DOCKER_USERNAME=${DOCKER_USERNAME}
-                            export DOCKER_PASSWORD=${DOCKER_PASSWORD}
-                            export SERVER_USERNAME=${SERVER_USERNAME}
-                            export SERVER_HOST=${SERVER_HOST}
-                            scp -i ${SERVER_SSH_KEY} -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/datadog-sidecar/scripts/deploy-to-target.sh ${SERVER_USERNAME}@${SERVER_HOST}:/tmp/deploy-to-target.sh
-                            ssh -i ${SSH_KEY_FILE} -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${SERVER_HOST} "export DOCKER_USERNAME='${DOCKER_USERNAME}'; export DOCKER_TOKEN='${DOCKER_TOKEN}'; /tmp/deploy-to-target.sh"                        """
+                    sh """
+                        scp -i ${SSH_KEY_FILE} -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/datadog-sidecar/scripts/deploy-to-target.sh ${SERVER_USERNAME}@${SERVER_HOST}:/tmp/deploy-to-target.sh
+                        ssh -i ${SSH_KEY_FILE} -o StrictHostKeyChecking=no ${SERVER_USERNAME}@${SERVER_HOST} "chmod +x /tmp/deploy-to-target.sh; DOCKER_USERNAME=${DOCKER_USERNAME} DOCKER_PASSWORD=${DOCKER_PASSWORD} /tmp/deploy-to-target.sh"
+                    """
                     }
                 }
             }
