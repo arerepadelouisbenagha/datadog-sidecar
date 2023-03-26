@@ -12,7 +12,7 @@ pipeline {
         stage('git clone') {
             steps {
                 script {
-                    git branch: 'main', credentialsId: 'github-login', url: 'https://github.com/arerepadelouisbenagha/devops-automation.git'
+                    git branch: 'main', credentialsId: 'github-login', url: 'https://github.com/arerepadelouisbenagha/datadog-sidecar.git'
                 }
             }
     stage('Deploy to Target Server') {
