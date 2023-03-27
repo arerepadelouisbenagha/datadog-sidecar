@@ -2,13 +2,13 @@
 
 Once set is sucessfully completed you should see host on your dashboard
 
+![pic-6](images/pic-6.png)
 ![pic-1](images/pic-1.png)
 ![pic-2](images/pic-2.png)
 ![pic-3](images/pic-3.png)
 
 
 Note: Don't push your API key to github. Redact it before push.
-
 
 # Jenkins CICD Implementation
 
@@ -65,9 +65,8 @@ In both cases, you'll need to create template files for datadog.yaml and docker-
 
 As show below the datadog api key get redacted while jenkins runs the playbook.
 
-![pic-6](images/pic-6.png)
-![pic-4](images/pic-4.png)
+![pic-5](images/pic-5.png)
 
 Detailed pipeline image shown below:
 
-![pic-5](images/pic-5.png)
+![pic-4](images/pic-4.png)
