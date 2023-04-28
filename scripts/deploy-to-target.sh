@@ -5,7 +5,7 @@ DOCKER_USERNAME="${DOCKER_USERNAME:-dockerhub-username}"
 DOCKER_PASSWORD="${DOCKER_PASSWORD:-dockerhub-token}"
 SERVER_USERNAME="ubuntu"
 SERVER_HOST="44.205.16.50"
-datadog_api_key="${datadog_api_key:-datadog_api_key}"
+datadog_api_key="${DATADOG_API_KEY:-datadog_api_key}"
 
 # Run as non root user
 sudo usermod -aG docker $USER
